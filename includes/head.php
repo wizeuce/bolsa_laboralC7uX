@@ -1,5 +1,6 @@
 <?php
     include("config.php");
+    session_start();
 ?>    
 
 <!DOCTYPE html>
@@ -57,12 +58,42 @@
                     <span>Registrar Usuario</span></a>
             </li>
 
-            <!-- Nav Item - Registrarse -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/form_login.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Iniciar Sesión</span></a>
-            </li>
+
+            <?php
+                if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
+            ?>
+
+                <!-- Nav Item - Listar usuarios -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_usuarios.php">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Listar Usuarios</span></a>
+                </li>
+            <?php
+                }
+            ?>
+            
+
+            <!-- Nav Item - iniciar / cerrar sesion -->
+            <?php
+                if(!isset($_SESSION["SESION_NOMBRES"])){
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/form_login.php">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Iniciar Sesión</span></a>
+                </li>
+            <?php
+                }else{                    
+                    ?>
+                    <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/logout.php">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Cerrar Sesión</span></a>
+                    </li>
+                    <?php
+                }
+            ?>
 
         </ul>
         <!-- Fin - Sidebar (Menú Izquierdo) -->
@@ -79,6 +110,16 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+
+                    <?php
+                        //echo $_SESSION["SESION_NOMBRES"]."********************";                        
+                        if(isset($_SESSION['SESION_NOMBRES']))                        
+                            echo "Bienvenido ".$_SESSION['SESION_NOMBRES']." ".$_SESSION['SESION_APELLIDOS'];
+                        else
+                            echo "Inicie sesión.";
+                        
+                    ?>
+                    
                 </nav>
                 <!-- End of Topbar -->
                 <!-- End HEAD.PHP -->
