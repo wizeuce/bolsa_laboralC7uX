@@ -17,10 +17,28 @@
                     <input name="txt_usuario" type="text" class="form-control" placeholder="Ingrese usuario" required="required">
                     
                 </div>
+                
                 <div class="form-group">
                     <label>Contraseña</label>
                     <input name="txt_password" type="password" class="form-control" placeholder="Password" required="required">
                 </div>
+
+                <?php
+                    if(isset($_REQUEST['error_login'])){
+                ?>
+
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert">
+                        Datos de usuario y contraseña incorrectos.
+                    </div>                    
+                </div>
+
+                <?php
+                    }
+                ?>
+
+
+
             
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>

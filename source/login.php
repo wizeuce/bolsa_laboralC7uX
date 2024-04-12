@@ -19,10 +19,15 @@
     //echo "Se encontró ".$numero_resultados." fila(s)";
 
     if($numero_resultados==1){
-        echo "Bienvenido al sistema.";
-    }else{
-        header("Location:form_login.php");
-    }  
 
+        $_SESSION["SESION_ROL"]=1;
+
+        header("Location:../index.php");
+
+        //echo "Bienvenido al sistema.";
+    }else{
+        header("Location:form_login.php?error_login=error");
+    }
+    
 
 ?>
