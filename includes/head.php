@@ -57,6 +57,13 @@
                     <span>Registrar Usuario</span></a>
             </li>
 
+            <!-- Nav Item - Registrarse -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/form_login.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Iniciar Sesión</span></a>
+            </li>
+
         </ul>
         <!-- Fin - Sidebar (Menú Izquierdo) -->
 

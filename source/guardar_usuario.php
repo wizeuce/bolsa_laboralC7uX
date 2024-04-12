@@ -19,8 +19,8 @@
 
 	//Guardamos los datos en la tabla 'usuarios'
 
-	$sql="INSERT INTO usuarios(dni,nombres,apellidos,telefono) 
-	      VALUES('$dni','$nombres','$apellidos','$telefono') ";
+	$sql="INSERT INTO usuarios(dni,nombres,apellidos,telefono,id_rol) 
+	      VALUES('$dni','$nombres','$apellidos','$telefono','3') ";
 
 	mysqli_query($conexion,$sql) or die("Error al guardar.");
 
