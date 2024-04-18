@@ -23,6 +23,9 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo RUTAGENERAL; ?>templates/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.structure.min.css" rel="stylesheet">
+    <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.theme.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -62,7 +65,6 @@
             <?php
                 if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
             ?>
-
                 <!-- Nav Item - Listar usuarios -->
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_usuarios.php">
@@ -73,6 +75,36 @@
                 }
             ?>
             
+
+
+            <?php
+                if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
+            ?>
+                <!-- Nav Item - Listar usuarios -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registrar_empresa.php">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Registrar Empresa</span></a>
+                </li>
+            <?php
+                }
+            ?>
+
+            <?php
+                if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
+            ?>
+                <!-- Nav Item - Listar usuarios -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_empresas.php">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Listar Empresas</span></a>
+                </li>
+            <?php
+                }
+            ?>
+
+
+
 
             <!-- Nav Item - iniciar / cerrar sesion -->
             <?php
