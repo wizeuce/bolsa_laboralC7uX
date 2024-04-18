@@ -23,6 +23,7 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo RUTAGENERAL; ?>templates/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- estilos para usar jquery ui -->
     <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.theme.css" rel="stylesheet">
 

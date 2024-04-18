@@ -29,7 +29,8 @@
     </a>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo RUTAGENERAL; ?>templates/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo RUTAGENERAL; 
+    ?>templates/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo RUTAGENERAL; ?>templates/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -41,9 +42,7 @@
     <!-- Page level plugins -->
     <script src="<?php echo RUTAGENERAL; ?>templates/vendor/chart.js/Chart.min.js"></script>
 
-
-    
-    
+    <!-- Plugin Jquery UI -->    
     <script src="<?php echo RUTAGENERAL; ?>js/jquery-ui.min.js"></script>
     
 
