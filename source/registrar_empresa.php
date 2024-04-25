@@ -1,57 +1,78 @@
+<link href="themplates/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
 <?php
-    include("../includes/head.php");
+include("../includes/head.php");
+include("../includes/conectar.php");
 ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <!-- Inicio de la zona central del sistema -->
-    <h1>Registro de Empresas nuevas</h1>
 
-    <form method="POST" action="guardar_empresa.php">
-  
-    <div class="row mb-3">
-      <label for="razon_social" class="col-sm-2 col-form-label">Razón Social</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="razon_social" required>
-      </div>
-    </div>
+    <h1>Registro Nueva Empresa </h1>
+    <!-- Inicio Zona  central del sistema  -->
 
-    <div class="row mb-3">
-      <label for="ruc" class="col-sm-2 col-form-label">RUC</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="ruc" required>
-      </div>
-    </div>
 
-    <div class="row mb-3">
-      <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="direccion" required>
-      </div>
-    </div>
+    <form class="row g-3" method="POST" action="guardar_empresa.php">
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Razon Social</label>
+            <input type="text" name="txt_razón_social" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Ruc</label>
+            <input type="number" name="txt_ruc" class="form-control">
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Dirección</label>
+            <input type="text" name="txt_direccion" class="form-control" id="inputAddress">
+        </div>
+        <div class="col-12">
+            <label for="inputAddress2" class="form-label">Teléfono</label>
+            <input type="number" name="txt_teléfono" class="form-control" id="inputAddress2">
+        </div>
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label"> Correo</label>
+            <input type="text" name="txt_correo" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label"> Usuario a cargo</label>
+            <select name="user_id" id="usuarios" class="form-control">
+                <option value="0">Usuarios</option>
+                <?php
+                $conexion = conectar();
+                $sql = "SELECT * FROM usuarios WHERE asignado=0 OR asignado IS NULL";
+                $resultado = mysqli_query($conexion, $sql);
 
-    <div class="row mb-3">
-      <label for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="telefono">
-      </div>
-    </div>
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    // Imprime una opción por cada fila de la consulta
+                    echo '<option  value="' . $fila['id'] . '">' . $fila['nombre'] . ' ' . $fila['apellidos'] . '</option>';
+                }
 
-    <div class="row mb-3">
-      <label for="correo" class="col-sm-2 col-form-label">Correo Electrónico</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" name="correo" required>
-      </div>
-    </div>
-    
+                // // Cerrar conexión y liberar recursos
+                // mysqli_close($conexion);
+                ?>
+            </select>
 
-    <button type="submit" class="btn btn-primary">Registrar Empresa</button>
+        </div>
+
+
+        <div class="col-md-12">
+            <label for="inputZip" class="form-label"></label>
+        </div>
+
+        <div class="col-12 ">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
     </form>
 
-    <!-- Fin  de la zona central del sistema -->
-</div>
-<!-- /.container-fluid --> 
 
+
+
+
+    <!-- Fin Zona  central del sistema  -->
+
+
+</div>
+<!-- /.container-fluid -->
 <?php
-    include("../includes/foot.php");
+include("../includes/foot.php");
 ?>

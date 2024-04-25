@@ -1,67 +1,118 @@
 <?php
-    include("../includes/head.php");
-
-    include("../includes/conectar.php");
-    $conexion=conectar();
+include("../includes/head.php");
+include("../includes/conectar.php");
+$conexion = conectar();
 ?>
+
 <!-- Begin Page Content -->
-<div class="container-fluid">    
-    <h1>Lista de Usuarios</h1>
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Lista de usuarios</h1>
+    <!-- Inicio Zona  central del sistema  -->
 
-    <?php
-        $sql="SELECT * FROM usuarios";
-        $registros=mysqli_query($conexion,$sql);
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>DNI</th>
+                            <th>Dirección</th>
+                            <th>Telefóno</th>
+                            <th>Usuarios</th>
+                            <th>Empresa</th>
+                            <th>Autorizado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
 
-        echo "<table class='table table-success table-hover'>";
-        
-        echo "<th>D.N.I.</th>";
-        echo "<th>Nombres</th>";
-        echo "<th>Apellidos</th>";
-        echo "<th>Teléfono</th>";
-        echo "<th>Acciones</th>";
+                    <tbody>
+                        <tr>
+                            <?php
+                            $goku = "SELECT * FROM usuarios";
+                            $lista = mysqli_query($conexion, $goku);
+                            $usuario = null;
+                            //echo "<table>"; 
+                            while ($fila = mysqli_fetch_array($lista)) {
+                                $id_empresa = $fila['asignado'];
+                                $sql = "SELECT * FROM empresa WHERE id= $id_empresa";
+                                $resultado = mysqli_query($conexion, $sql);
+                                if ($resultado && mysqli_num_rows($resultado) > 0) {
+                                    $usuario = mysqli_fetch_assoc($resultado);
+                                }else {
+                                    $usuario = null;
+                                }
+                                echo "<tr>";
+                                echo "<td>" . $fila["nombre"] . "</td>";
+                                echo "<td>" . $fila["apellidos"] . "</td>";
+                                echo "<td>" . $fila["dni"] . "</td>";
+                                echo "<td>" . $fila["dirección"] . "</td>";
+                                echo "<td>" . $fila["teléfono"] . "</td>";
+                                echo "<td>" . $fila["usuario"] . "</td>";
+                                if ($usuario != null || $usuario != 0) {
+                                    echo "<td>" .  $usuario["razón_social"] . "</td>";
+                                } else {
+                                    echo "<td>No disponible</td>";
+                                }
 
-        while($fila = mysqli_fetch_array($registros)){
-            echo "<tr>";
-                echo "<td>".$fila['dni']."</td>";
-                echo "<td>".$fila['nombres']."</td>";                
-                echo "<td>".$fila['apellidos']."</td>";
-                echo "<td>".$fila['telefono']."</td>";
+                                if ($fila["id_rol"]=='0') {
+                                    echo "<td>NO</td>";
+                                } else {
+                                    echo "<td>SI</td>";
+                                }
 
-                //botones para editar y eliminar un usuario
-                echo "<td>";
-                    ?>
-                    <button type="button" class="btn btn-primary" onClick="f_editar('<?php echo $fila['id']; ?>');">Editar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                    <?php
-                echo "</td>";
 
-            echo "</tr>";
-        }
-        echo "</table>";
-    ?>    
-    <div id="divdialog"></div>
-    
+
+                                echo "<td>";  ?>
+                                <button title="Editar" class="btn btn-primary" onclick="editar_sayayin('<?php echo $fila['id'] ?>')"><i class="fas fa-edit"></i></button> 
+                                <button title="Eliminar" class="btn btn-danger" onclick="delete_sayayin('<?php echo $fila['id'] ?>')"> <i class="fas fa-trash"></i></button> 
+                                <button title="Autorizar" class="btn btn-success" onclick="f_autorizar('<?php echo $fila['id'] ?>')"> <i class="fas fa-user"></i></button>
+                                
+                                <?php "</td>";
+
+                                
+                                                                                                                                                                                                                                                                                                                    echo "</tr>";
+                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                //echo "</table>"; 
+                                                                                                                                                                                                                                                                                                                    ?>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
-<!-- /.container-fluid --> 
-
+<!-- /.container-fluid -->
 <?php
-    include("../includes/foot.php");
+include("../includes/foot.php");
 ?>
+
 
 <script>
-    /*
-    $(document).ready(function(){
-        $("#divdialog").dialog({
-            width:500,
-            height:400,
-            title:"Asignar usuario..",
-        });
-        $( "#divdialog" ).dialog( "open" );
-    });
-    */
-    function f_editar(pid){
-        //redireccionamos hacia el archivo 'modificar_usuario.php'
-        location.href="modificar_usuario.php?pid="+pid;
+    function editar_sayayin(id) {
+        //redirect
+        location.href = "editar_usuario.php?id=" + id;
     }
 
-</script>    
+    function delete_sayayin(id) {
+        location.href = "eliminar_usuario.php?id=" + id;
+    }
+
+    function f_autorizar(id){
+
+        if(confirm("Se va a autorizar a este usuario. Desea Continuar?")){            
+            location.href = "autorizar_usuario.php?id="+id;
+        }
+    }
+
+</script>

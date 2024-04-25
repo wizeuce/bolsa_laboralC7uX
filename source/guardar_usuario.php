@@ -1,29 +1,36 @@
 <?php
 
-	include("../includes/conectar.php");
+    include("../includes/conectar.php");
 
-	$conexion = conectar();
-	
-	//Recibimos los datos del formulario	
-	$dni     = $_POST['txt_dni'];
-	$nombres = $_POST['txt_nombres'];
-	$apellidos = $_POST['txt_apellidos'];
-	$telefono  = $_POST['txt_telefono'];
+    $conexion = conectar();
 
-	/*
-	echo "DNI Recibido: ".$dni;
-	echo "nombres Recibido: ".$nombres;
-	echo "apellidos Recibidos: ".$apellidos;
-	echo "telefono Recibido: ".$telefono;
-	*/
 
-	//Guardamos los datos en la tabla 'usuarios'
 
-	$sql="INSERT INTO usuarios(dni,nombres,apellidos,telefono,id_rol) 
-	      VALUES('$dni','$nombres','$apellidos','$telefono','3') ";
+    //Recibimos datos del formulario
+    $nombres = $_POST['txt_nombres'];
+    $apellidos = $_POST['txt_apellidos'];
+    $dni = $_POST['txt_dni'];
+    $telefono = $_POST['txt_teléfono'];
+    $direccion = $_POST['txt_dirección'];
+    $usuario = $_POST['txt_usuario'];
+    $contraseña = $_POST['txt_contraseña'];
 
-	mysqli_query($conexion,$sql) or die("Error al guardar.");
+    /*
+    echo "DNI recibido: ".$dni;
+    echo "nombres recibido: ".$nombres;
+    echo "apellidos recibido: ".$apellidos;
+    echo "direccion recibido: ".$direccion;
+    echo "telefono recibido: ".$telefono;
+    */
+    //conexion a la DB
+    //gurdamos datos en tabla usuarios
 
-	header("Location:listar_usuarios.php")
+    $sql = "INSERT INTO usuarios (dni,nombre,apellidos,dirección,teléfono, usuario, contrasena, id_rol) VALUES('$dni','$nombres','$apellidos','$direccion','$telefono', '$usuario', '$contraseña' , '0') ";
+
+    mysqli_query($conexion,$sql) or die("Error al guardar.");
+    
+    //header("location: listar_usuarios.php");
+
+    header("location: ../index.php?usuario_registrado=ok");
 
 ?>
